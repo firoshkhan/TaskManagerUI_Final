@@ -1,0 +1,127 @@
+<script>
+btnClick= function () {
+    alert('ss');
+        this.router.navigate(['/user']);
+};
+</script>
+<div class="container" >
+    <br>
+    <div class="card">
+    
+        <div class="card-header page-header">
+          <h4>View  Task</h4>
+        </div>
+        <div class="card-body">
+          
+            <form class="form-horizontal" >
+                
+                <div class="form-group d-flex">
+                <div  class="p-2"><label class="control-label" for="Task">Task:</label></div> 
+                  <div class="p-2">
+                    <input type="text" name ="Task" class="form-control" [(ngModel)]="Item.TaskName"  id="Task" >
+                  
+                  </div>
+              
+                    <div  class="p-2"> <label class="control-label " for="Priority">Parent Task:</label></div>
+                  <div class="p-2"> 
+                      <input type="text"  name ="ParentTask" class="form-control" [(ngModel)]="Item.ParentTaskId" id="Task">
+                  </div>
+                </div>
+                <div class="form-group d-flex">
+                    <div  class="p-1"><label class="control-label " for="PriorityFrom">Priority From:</label></div>
+                    <div class="p-1">
+                      <input type="text" name ="PriorityFrom" class="form-control" [(ngModel)]="Item.Priority"  id="PriorityFrom" >
+                    
+                    </div>
+                      <div  class="p-2"><label class="control-label " for="PriorityTo">Priority To:</label></div>
+                      <div class="p-2">
+                        <input type="text" name ="PriorityTo" class="form-control" [(ngModel)]="Item.Priority" id="PriorityTo"  >
+                      
+                      </div>
+                    
+                        <div  class="p-2"><label class="control-label " for="StartDate">Start Date:</label></div>
+                        <div class="p-2">
+                          <input type="text" name ="StartDate" class="form-control" [(ngModel)]="Item.StartDate "  id="StartDate"  >
+                        
+                        </div>
+                        <div  class="p-2"><label class="control-label " for="EndDate">End Date:</label></div>
+                        <div class="p-2">
+                          <input type="text" name ="EndDate" class="form-control" [(ngModel)]="Item.EndDate "  id="EndDate"  >
+                        
+                        </div>
+                      </div>
+              
+         
+    
+     </form>
+         
+        </div>
+    
+<div class="form-group col-md-12">
+
+    <div class="table-responsive">
+        <table id="mytable" class="table "    >
+            <thead >
+                <tr >
+                    <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> Task</th>
+                    <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> Parent</th>
+                    <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> Priority </th>
+                    <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> Start</th>
+                    <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> End</th>
+                    <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> </th>
+     
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                   <td>Task1</td>
+                    <td>Task2</td>
+                    <td>1</td>
+                    <td>10/26/2013</td>
+                    <td>10/26/2013</td>
+                    <td>
+                        <button (click)="Edit()">Edit</button>&nbsp;
+                
+                     
+                          <button (click)="Endtask()">End Task</button>&nbsp;
+                    
+                        <button (click)="Endtask()">Delete Task</button>&nbsp;
+                  </td>
+                </tr>
+
+                <tr>
+                    <td>Task1</td>
+                     <td>Task2</td>
+                     <td>1</td>
+                     <td>10/26/2013</td>
+                     <td>10/26/2013</td>
+                     <td>
+                        <button (click)="Edit()">Edit</button>&nbsp;
+                          <button (click)="Endtask()">End Task</button>&nbsp;
+                    
+                        <button (click)="Endtask()">Delete Task</button>&nbsp;  
+                        
+                  </td>
+                 </tr>
+            </tbody>
+            <tbody *ngFor="let item of task">
+              <tr>
+                <td>
+                     the test {{item.TaskName}}
+                </td>
+                
+              </tr>
+          </tbody>
+        </table>
+
+
+
+    </div>
+</div>
+
+</div>
+
+ 
+
+</div>
+

@@ -1,0 +1,64 @@
+<div class="container" >
+    <br>
+    <div class="card">
+    
+        <div class="card-header page-header">
+          <h4>Update Task</h4>
+        </div>
+        <div class="card-body">
+          
+            <form class="form-horizontal" >
+                
+                <div class="form-group d-flex">
+                <div  class="col-sm-2"><label class="control-label" for="Task">Task:</label></div> 
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="Item.Task"  id="Task" placeholder="Enter Task">
+                  
+                  </div>
+                </div>
+                <div class="form-group d-flex">
+                    <div  class="col-sm-2"> <label class="control-label " for="Priority">Priority:</label></div>
+                  <div class="col-sm-4"> 
+                    <input type="range" MIN="1" MAX="30" step="1" value="0" class="form-control"  [(ngModel)]="Item.Priority"  id="Priority" placeholder="Enter password">
+                  </div>
+                </div>
+                <div class="form-group d-flex">
+                    <div  class="col-sm-2"><label class="control-label " for="ParentTask">Parent Task:</label></div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control" [(ngModel)]="Item.ParentTaskId"  id="ParentTask" placeholder="Enter Task">
+                    
+                    </div>
+                  </div>
+                  <div class="form-group  d-flex">
+                      <div  class="col-sm-2"><label class="control-label " for="StartDate">Start Date:</label></div>
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control" [(ngModel)]="Item.StartDate" id="StartDate"   placeholder="Enter task start date">
+                      
+                      </div>
+                    </div>
+                    <div class="form-group  d-flex">
+                        <div  class="col-sm-2"><label class="control-label " for="EndDate">End Date:</label></div>
+                        <div class="col-sm-4">
+                          <input type="text" class="form-control" [(ngModel)]="Item.EndDate "  id="EndDate"  placeholder="Enter task end date">
+                        
+                        </div>
+                      </div>
+                <div class="form-group d-flex"> 
+                  <div class="col-sm-offset-2 col-sm-8">
+                  
+                    <button (click)="Update()"  class="btn btn-default">Update</button> &nbsp;
+                  
+                    
+                      <button (click)="Cancel()"  class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+         
+    
+     </form>
+         
+        </div>
+      </div>
+
+ 
+
+</div>
