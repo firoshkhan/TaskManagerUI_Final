@@ -18,35 +18,40 @@ btnClick= function () {
                 <div class="form-group d-flex">
                 <div  class="p-2"><label class="control-label" for="Task">Task:</label></div> 
                   <div class="p-2">
-                    <input type="text" name ="Task" class="form-control" [(ngModel)]="Item.TaskName"  id="Task" >
+                    <input type="text" name ="Task" class="form-control" [(ngModel)]="FilterTaskName"  (keyup)='Search()'   id="Task" >
                   
                   </div>
               
-                    <div  class="p-2"> <label class="control-label " for="Priority">Parent Task:</label></div>
+                    <div  class="p-2"> <label class="control-label " for="ParentTask">Parent Task:</label></div>
                   <div class="p-2"> 
-                      <input type="text"  name ="ParentTask" class="form-control" [(ngModel)]="Item.ParentTaskId" id="Task">
+                      <input type="text"  name ="ParentTask" class="form-control" 
+                      [(ngModel)]="FilterParentTask"  (keyup)='Search()'   id="ParentTask">
                   </div>
                 </div>
                 <div class="form-group d-flex">
                     <div  class="p-1"><label class="control-label " for="PriorityFrom">Priority From:</label></div>
                     <div class="p-1">
-                      <input type="text" name ="PriorityFrom" class="form-control" [(ngModel)]="Item.Priority"  id="PriorityFrom" >
+                      <input type="text" name ="PriorityFrom" class="form-control" 
+                      [(ngModel)]="FilterPriorityFrom"  (keyup)='Search()'   id="PriorityFrom" >
                     
                     </div>
                       <div  class="p-2"><label class="control-label " for="PriorityTo">Priority To:</label></div>
                       <div class="p-2">
-                        <input type="text" name ="PriorityTo" class="form-control" [(ngModel)]="Item.Priority" id="PriorityTo"  >
+                        <input type="text" name ="PriorityTo" class="form-control" 
+                        [(ngModel)]="FilterPriorityTo"  (keyup)='Search()'  id="PriorityTo"  >
                       
                       </div>
                     
                         <div  class="p-2"><label class="control-label " for="StartDate">Start Date:</label></div>
                         <div class="p-2">
-                          <input type="text" name ="StartDate" class="form-control" [(ngModel)]="Item.StartDate "  id="StartDate"  >
+                          <input type="date" name ="StartDate" class="form-control" 
+                          [(ngModel)]="FilterStartDate"  (keyup)='Search()'  (change)='Search()'  id="StartDate"  >
                         
                         </div>
                         <div  class="p-2"><label class="control-label " for="EndDate">End Date:</label></div>
                         <div class="p-2">
-                          <input type="text" name ="EndDate" class="form-control" [(ngModel)]="Item.EndDate "  id="EndDate"  >
+                          <input type="date" name ="Enddate" class="form-control" 
+                          [(ngModel)]="FilterEndDate"  (keyup)='Search()'  (change)='Search()' id="EndDate"  >
                         
                         </div>
                       </div>
@@ -60,8 +65,8 @@ btnClick= function () {
 <div class="form-group col-md-12">
 
     <div class="table-responsive">
-        <table id="mytable" class="table "    >
-            <thead >
+        <table id="mytable" class="table table-bordered  " >
+            <thead class="thead-light">
                 <tr >
                     <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> Task</th>
                     <th><i class="fa fa-sort float-right" style="color:#808080" aria-hidden="true"></i> Parent</th>
@@ -72,44 +77,35 @@ btnClick= function () {
      
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                   <td>Task1</td>
-                    <td>Task2</td>
-                    <td>1</td>
-                    <td>10/26/2013</td>
-                    <td>10/26/2013</td>
-                    <td>
-                        <button (click)="Edit()">Edit</button>&nbsp;
-                
-                     
-                          <button (click)="Endtask()">End Task</button>&nbsp;
-                    
-                        <button (click)="Endtask()">Delete Task</button>&nbsp;
-                  </td>
-                </tr>
-
-                <tr>
-                    <td>Task1</td>
-                     <td>Task2</td>
-                     <td>1</td>
-                     <td>10/26/2013</td>
-                     <td>10/26/2013</td>
-                     <td>
-                        <button (click)="Edit()">Edit</button>&nbsp;
-                          <button (click)="Endtask()">End Task</button>&nbsp;
-                    
-                        <button (click)="Endtask()">Delete Task</button>&nbsp;  
-                        
-                  </td>
-                 </tr>
-            </tbody>
-            <tbody *ngFor="let item of task">
+           
+            <tbody *ngFor="let item of task;let i = index" class="table table-bordered  ">
               <tr>
-                <td>
-                     the test {{item.TaskName}}
+                <td >
+                      {{item.TaskName}}
                 </td>
-                
+                <td >
+                    <div *ngIf="item['TaskParent'] !== null">{{ item['TaskParent']['TaskName'] }}</div>                              
+                 
+                </td>
+                <td>  
+                {{item.Priority}}
+                </td>
+                <td>
+                {{item.Startdate | date:'mediumDate' }}
+                </td>
+                <td>
+                {{item.Enddate| date:'mediumDate'}}
+                </td>
+                <td>
+
+                    <div *ngIf="item['Enddate'] == null">  
+                  <button (click)="Edit(item)" class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                    <button (click)="EndTask(item)" class="btn btn-primary btn-sm">End Task</button>&nbsp;
+              
+                  <button (click)="Delete(item,i)" class="btn btn-primary btn-sm ">Delete Task</button>&nbsp;  
+                </div>
+               
+            </td>
               </tr>
           </tbody>
         </table>

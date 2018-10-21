@@ -10,34 +10,43 @@
             <form class="form-horizontal" #regForm="ngForm" >
                 
                 <div class="form-group d-flex">
-                <div  class="col-sm-2"><label class="control-label" for="Task">Task:</label></div> 
+                <div  class="col-sm-3"><label class="control-label" for="Task">Task:</label></div> 
                   <div class="col-sm-4">
-                    <input type="text" class="form-control" [(ngModel)]="Item.TaskName"   placeholder="Enter Task" name="Task1">
+                    <input type="text" class="form-control" [(ngModel)]="Item.TaskName"
+                       placeholder="Enter Task" name="Task1">
                   
                   </div>
                 </div>
                 <div class="form-group d-flex">
-                    <div  class="col-sm-2"> <label class="control-label " for="Priority">Priority:</label></div>
+                    <div  class="col-sm-3"> <label class="control-label " for="Priority">Priority:</label></div>
                   <div class="col-sm-4"> 
-                    <input name="Priority" type="range" MIN="1" MAX="30" step="1" value="0" class="form-control"  [(ngModel)]="Item.Priority"   placeholder="Enter password">
+                    <input name="Priority" #Priority (input)="Priority.value"   type="range" MIN="1" MAX="30" step="1" value="1" class="form-control" 
+                     [(ngModel)]="Item.Priority"   placeholder="Enter password">
+                    
+                 
+                    <label for="Priority">Priority ({{ Priority.value }})</label>
                   </div>
                 </div>
+
+
+          
                 <div class="form-group d-flex">
-                  <div  class="col-sm-2"><label class="control-label " for="ParentTask">Parent Task:</label></div>
-                  <div class="col-sm-4">
-                    <input name="ParentTask" type="text" class="form-control" [(ngModel)]="Item.ParentTaskId"   placeholder="Enter Task">
-                  
+                  <div  class="col-sm-3"><label class="control-label " for="ParentTask">Parent Task:</label></div>
+                  <div class="col-sm-4"   >
+                    <select  [(ngModel)]="Item.TaskParentId" name="ParentTask" class="form-control" >
+                      <option  *ngFor="let item of task" [value]="item.TaskId"> {{item.TaskName}}</option>
+                    </select>  
                   </div>
                 </div>
                 <div class="form-group  d-flex">
-                    <div  class="col-sm-2"><label class="control-label " for="StartDate">Start Date:</label></div>
+                    <div  class="col-sm-3"><label class="control-label " for="StartDate">Start Date:</label></div>
                     <div class="col-sm-4">
                       <input name="StartDate" type="date" class="form-control" [(ngModel)]="Item.Startdate" id="StartDate"   placeholder="Enter task start date">
                     
                     </div>
                   </div>
                   <div class="form-group  d-flex">
-                      <div  class="col-sm-2"><label class="control-label " for="EndDate">End Date:</label></div>
+                      <div  class="col-sm-3"><label class="control-label " for="EndDate">End Date:</label></div>
                       <div class="col-sm-4">
                         <input name="EndDate" type="date" class="form-control" [(ngModel)]="Item.EndDate "  id="EndDate"  placeholder="Enter task end date">
                       
@@ -49,8 +58,8 @@
                   <button (click)="Add()" name="Add" class="btn btn-default">Add Task</button> &nbsp;
                 
                   
-                    <button (click)="Reset()" name="Reset"  class="btn btn-default"> Reset Task</button>
-                  <input type="button" value="Save" (click)="Add()">>  
+                    <button (click)="regForm.reset()" name="Reset"  class="btn btn-default"> Reset Task</button>
+                 
                   </div>
               </div>
         

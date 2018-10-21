@@ -12,46 +12,58 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 export class SharedService {
   GetUrl="http://localhost:33274/GetAlltasks";
   AddUrl="http://localhost:33274/AddTask";
+  EditUrl="http://localhost:33274/UpdateTask";
+  GetTaskUrl="http://localhost:33274/GetTasksById";
+  DelTaskUrl="http://localhost:33274/DeleteTask";
+  
   constructor(private _http: Http) { }
-    GetAll():Observable<Task[]>
+    GetAll():Observable<any>
     {
         return this._http.get(this.GetUrl)
-        .map(response => {
-            { return <Task[]>response.json() };
-        })
+        .map(response => response.json() );
+    }
+    GetTaskById(taskid:number):Observable<any>
+    {
+       // console.log(" my task id" + taskid);
+        return this._http.get(this.GetTaskUrl+"/"+taskid)
+        .map(response => response.json() );
     }
     Add(task:Task):Observable<string>
     {
-       
+       // { return <Task[]>response.json() };
         console.log("ssds1" + task.TaskName);
-        console.log("ssds2" + task.Priority);
+        console.log("ssds2" + task.Priority);   
         console.log("ssds3" + task.Startdate);
-        console.log("ssds4" + task.EndDate);
+        console.log("ssds4" + task.Enddate);
         console.log("ssds4" + this.AddUrl);
        
         const headers = new HttpHeaders().set('content-type', 'application/json');  
-// return this._http.post(this.AddUrl,task)
-        return this._http.post(this.AddUrl,
-            {"TaskParentId":null,"TaskName":"Test fayaz ","Priority":10,"Startdate":"2018-09-30T00:00:00","Enddate":"2018-09-30T00:00:00","TaskParent":null})
+ return this._http.post(this.AddUrl,task)
+      //  return this._http.post(this.AddUrl,
+        //    {"TaskParentId":null,"TaskName":"Test fayaz ","Priority":10,"Startdate":"2018-09-30T00:00:00","Enddate":"2018-09-30T00:00:00","TaskParent":null})
        .map(response => {
              {return <string>response.json() } ;
             })
            
     }
-    Delete(taskid:number):Observable<any>
+    Delete(taskid:number):Observable<string>
     {
-        return this._http.delete(this.GetUrl+"/"+taskid)
+        return this._http.delete(this.DelTaskUrl+"/"+taskid)
         .map(response => {
-            { return <Task[]>response.json() };
+            { return <string>response.json() };
         })
 
 
     }
-    Edit(taskid:number):Observable<any>
+    Edit(task:Task):Observable<string>
     {
-        return this._http.put(this.GetUrl,taskid)
+          console.log("edit " + task.TaskName);
+          console.log("edit " + task.Startdate);
+
+          const headers = new HttpHeaders().set('content-type', 'application/json');  
+        return this._http.put(this.EditUrl,task)
         .map(response => {
-            { return <Task[]>response.json() };
+            { return <string>response.json() };
         })
 
 
@@ -67,7 +79,7 @@ export class SharedService {
 
     findWeather(city, state) {
         //this.totReqsMade = this.totReqsMade + 1;
-        return this._http.get(this.Url)
+        return this._http.get(this.GetUrl)
             .map(response => {
                 { return response.json() };
             })

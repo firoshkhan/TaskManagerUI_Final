@@ -14,8 +14,8 @@ import { SharedService } from './services/shared.service';
 const appRoutes: Routes=[
    { path: 'add', component:AddComponent},
    { path: 'view', component:ViewComponent},
-   { path: 'update', component:UpdateComponent}
-  ]
+   { path: 'update/:id', component:UpdateComponent}
+  ] 
 
 @NgModule({
   declarations: [

@@ -1,9 +1,10 @@
 export class Task {
     TaskId: number;
     Priority:number;
-    ParentTaskId:number;
+    TaskParentId:number;
     TaskName:string;
     Startdate:Date;
-    EndDate:Date;
+    Enddate:Date;
+    TaskParent:Task;
 
 }
