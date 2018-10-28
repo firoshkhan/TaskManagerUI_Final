@@ -26,8 +26,7 @@ export class UpdateComponent implements OnInit
       console.log(" task id" + this.TaskId );
      } 
  
-  //  let param1: any = this._router.snapshot.queryParams["param1"];
-
+ 
   Update()
   {
 
@@ -36,23 +35,13 @@ export class UpdateComponent implements OnInit
  
     console.log(this.msg);
   } 
-  goToPage(pageName:string){
-    
-    
-    //this._router.navigate avigate([`${pageName}`]);
-  }
+  
   ngOnInit()
    {
     this.Item=new Task();
-    console.log(" task id" + this.TaskId);
-   this._service.GetTaskById(parseInt(  this.TaskId))
+       this._service.GetTaskById(parseInt(  this.TaskId))
     .subscribe(i=>{this.Item=i; 
-     // console.log("Startdate 3" + this.Item.Startdate );
-      console.log("Startdate 4 " + this.Item.Startdate );
-    //  console.log("Startdate 6 "+  this.datePipe.transform(this.Item.Startdate,'yyyy-MM-dd'));
-    //  this.Item.Startdate=this.datePipe.transform(this.Item.Startdate,'yyyy-MM-dd');
-      console.log("Startdate5 " + this.Item.Startdate );
-     } );
+        } );
         
         this._service.GetAll()
         .subscribe(i=>{this.task=i;    });   
