@@ -3,12 +3,16 @@ import { Http,Response } from '@angular/http';
 import { Observable } from  'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Task } from '../models/task';
+import { HttpModule } from '@angular/http';
+//import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';  
 //import 'rxjs/Rx';
 //import { Observable } from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
+
 export class SharedService {
   GetUrl="http://localhost:33274/GetAlltasks";
   AddUrl="http://localhost:33274/AddTask";
@@ -17,6 +21,10 @@ export class SharedService {
   DelTaskUrl="http://localhost:33274/DeleteTask";
   
   constructor(private _http: Http) { }
+    Greet(name:string):string{
+        return 'Hello'+ name;
+    
+    }
     GetAll():Observable<any>
     {
         return this._http.get(this.GetUrl)

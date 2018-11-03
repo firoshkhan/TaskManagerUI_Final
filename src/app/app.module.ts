@@ -7,8 +7,8 @@ import { AddComponent } from './ui/add/add.component';
 import { UpdateComponent } from './ui/update/update.component';
 import { ViewComponent } from './ui/view/view.component';
 import { FilterPipe } from './pipes/filter.pipe';
-import {HttpClientModule} from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import { SharedService } from './services/shared.service';
 
 const appRoutes: Routes=[
@@ -23,11 +23,11 @@ const appRoutes: Routes=[
     AddComponent,
     UpdateComponent,
     ViewComponent,
-    FilterPipe
+    FilterPipe    
     
   ],
   imports: [
-    BrowserModule,FormsModule, RouterModule.forRoot(appRoutes),HttpClientModule,HttpModule
+    BrowserModule,FormsModule, RouterModule.forRoot(appRoutes),HttpModule,HttpClientModule
   ],
   providers: [SharedService],
   bootstrap: [AppComponent]

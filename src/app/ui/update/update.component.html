@@ -36,7 +36,8 @@
               <div class="form-group  d-flex">
                 <div  class="col-sm-2"><label class="control-label " for="StartDate">Start Date:</label></div>
                 <div class="col-sm-4">
-                  <input name="StartDate" type="date"  class="form-control" (ngModelChange)="Item.Startdate = $event"  [ngModel]="Item.Startdate|date:'yyyy-MM-dd'"  id="StartDate"   placeholder="Enter task start date">
+                  <input name="StartDate" type="date"  class="form-control" (ngModelChange)="Item.Startdate = $event" 
+                   [ngModel]="Item.Startdate|date:'yyyy-MM-dd'"  id="StartDate"   placeholder="Enter task start date">
                 
                 </div>
               </div>

@@ -13,10 +13,9 @@ Item:Task;
 msg:string;
 task:Task[];
 
-
  constructor(private _service:SharedService) {
     this.Item=new Task();
-    
+   
   
   }
   ngOnInit() {
@@ -26,13 +25,12 @@ task:Task[];
         });
     
   }
-
    Add() 
   {
    
     this._service.Add(this.Item)
     .subscribe(i=>this.msg=i); 
-    console.log(this.msg);
+    console.log('FF'+this.msg);
   }
 
   
