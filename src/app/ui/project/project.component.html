@@ -1,0 +1,216 @@
+<script>
+  btnClick= function () {
+     alert('ss');
+          this.router.navigate(['/project']);
+  };
+  </script>
+  <div class="container col-sm-11" >
+      <br>
+      <div class="card col-sm-12">       
+         <div>
+         
+          <div class="card-body col-sm-12">
+             <form class="form-horizontal"  (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+              
+                          <div class="form-group d-flex">
+                          <div  class="col-sm-2"><label class="control-label" for="Task">Project :</label></div> 
+                            <div class="col-sm-4">
+                              <input type="text" class="form-control" [(ngModel)]="Item.ProjectName"
+                                 placeholder="Enter Project Name" name="ProjectName" #FirstName="ngModel"
+                                 [ngClass]="{ 'is-invalid': f.submitted && ProjectName.invalid }"
+                                 required  />
+                                 <div *ngIf="f.submitted && ProjectName.invalid" class="invalid-feedback">
+                                  <div *ngIf="ProjectName.errors.required">Project Name is required</div>
+                                </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group ">
+                                  <div  class="col-sm-2"><label class="control-label" for="LastName"></label>
+                                  </div> 
+                                    <div class="col-sm-10 row">
+                                      <div>
+                                      <label>
+                                        <input type="checkbox" ng-model="checkboxModel.value1" (change)="SetDate($event)" >Set Start and End Date
+                                      </label>
+                                     </div>&nbsp;
+                                    <div>
+                                      <input name="StartDate" type="date" class="form-control" 
+                                      [ngModel]="Item.Startdate|date:'yyyy-MM-dd'" id="StartDate"   placeholder="Start date"
+                                      (ngModelChange)="Item.Startdate = $event;compareTwoDates()" >
+                                    </div>&nbsp;
+                                    <div>
+                                
+                                        <input name="EndDate" type="date" class="form-control"
+                                        [ngModel]="Item.Enddate|date:'yyyy-MM-dd' "  id="EndDate"  placeholder="End date" 
+                                        (ngModelChange)="Item.Enddate = $event;compareTwoDates()" >
+                                      </div>&nbsp;
+                                      <div *ngIf="error.isError" style="color: brown" >
+                                          {{ error.errorMessage }}
+                                      </div>
+
+                                     </div>
+
+                        </div>
+                     
+
+
+                                  <div class="form-group d-flex">
+                                          <div  class="col-sm-2"><label class="control-label" for="Task">Priority</label></div> 
+                                            <div class="col-sm-4">
+                                                                                
+                                              <input name="Priority" #Priority (input)="Priority.value"   type="range" MIN="0" MAX="30" class="form-control" 
+                                              [(ngModel)]="Item.Priority"   >
+                                             
+                                          
+                                             <label for="Priority">Priority ({{ Priority.value }})</label>
+                                                
+                                       
+                                            </div>
+                                          </div>                                              
+          
+                                          <div class="form-group d-flex">
+                                            <div  class="col-sm-2"><label class="control-label" for="Task">Manager</label></div> 
+                                              <div class="col-sm-6 row">
+                                                <div>
+                                                <input name="Manager" type="text" class="form-control" [(ngModel)]="Item.Manager "  id="EndDate"  >
+                                              </div>&nbsp;
+                                                <div>
+                                                <button   name="Search"  class="btn btn-default" (click)="open(content)"> Search </button>
+                                              </div>
+                                              </div>
+                                            </div>
+                        
+                          
+                        <div class="form-group d-flex"> 
+                          <div class="col-sm-offset-2 col-sm-8">
+                          
+                            <button  (click)="AddOrUpdate()"  name="Add" class="btn btn-default" [disabled]="!f.valid"  >{{btnAddCaption}} </button> &nbsp;
+                          
+                            
+                              <button type="reset"  (click)="Reset();" name="Reset"  class="btn btn-default"> Reset </button>
+                           
+                            </div>
+                        </div>
+                       
+              
+               </form>
+                  
+               <!--model-->
+               <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Select Manager...</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                        <div class="form-group d-flex ">
+
+                            <div  class="col-sm-10" >
+                                <input type="text" name ="Search" class="form-control" [(ngModel)]="userFilter.FirstName" placeholder="Search by First Name..."
+                                id="FilterFirstName" >
+                          
+                              <select size="10" [(ngModel)]="Item.ProjectManagerId" name="User" class="form-control" >
+                                <option  *ngFor="let item of user| orderBy:order:caseInsensitive:true | filterBy: userFilter; let i = index" [value]="item.UserId"> {{item.FirstName}} &nbsp; {{item.LastName}} </option>
+                              </select>  
+                            </div>
+                          </div>
+
+                   
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Select</button>
+                  </div>
+                </ng-template>
+          
+                      
+                <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch this demo modal</button>
+                <hr>
+                <!--model-->
+              </div>
+             
+              <div>
+                      <span >   {{msg}}</span>  
+                   
+              </div>
+
+<hr>
+<div class="row"> 
+    <div class="col-md-2">&nbsp;</div>
+    <div class="col-md">
+         <div>
+          <input type="text" name ="Search" class="form-control" [(ngModel)]="ProjectFilter.ProjectName" placeholder="Search by Project Name..."
+             id="FilterProjectName" >
+            </div>
+             <div class="col-md">
+            Sort By
+              <button (click)="Sort('Startdate')" class="btn btn-primary btn-sm">Start Date</button>&nbsp;
+              <button (click)="Sort('Enddate')" class="btn btn-primary btn-sm">End Date</button>&nbsp;
+              <button (click)="Sort('Priority')" class="btn btn-primary btn-sm">Priority</button>&nbsp;
+              <button (click)="Sort('Completed')" class="btn btn-primary btn-sm">Completed</button>&nbsp;
+            </div>
+  </div>
+
+    
+  <div>  
+
+
+          <ul class="list-group list-unstyled">
+ 
+              <li *ngFor="let item of project  | orderBy:order:caseInsensitive:true | 
+              filterBy: ProjectFilter; let i = index"> 
+              <HR>  
+              <div class="row">  
+                 
+                  <div class="col-md-2">
+                  <span >Project:</span>     
+                  <span class="label lblcolored">{{ item.ProjectName }}</span>
+                  </div>   
+                  <div  class="col-md-1">                       
+                  <span>#Tasks:</span>     
+                  <span class="label lblcolored">{{ item.NoOfTasks }}</span>
+                  </div>   
+                  <div  class="col-md-1">
+                  <span>Completed:</span>   
+                  <span class="label lblcolored">{{ item.Completed }}</span>
+                  </div>  
+                  <div  class="col-md-2"> 
+                  <span>Start Date:</span>   
+                  <span class="label lblcolored">{{ item.Startdate | date:'mediumDate' }}</span>
+                  </div>
+                  <div  class="col-md-2">   
+                  <span>End Date:</span>   
+                  <span class="label lblcolored">{{ item.Enddate  | date:'mediumDate'}}</span>
+                  </div>  
+                  <div  class="col-md-1"> 
+                  <span>Priority:</span>   
+                  <span class="label lblcolored">{{ item.Priority }}</span>
+                  </div>                 
+
+                  <div  class="col-md-2">
+
+                    <span><button (click)="ViewUser(item)" class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                    </span>
+                    <span><button (click)="Delete(item,i)" class="btn btn-secondary btn-sm">Delete</button>&nbsp;
+                    </span>
+                  </div> 
+
+                  <HR>
+                  </div>
+              </li>
+          </ul>
+
+  </div>
+
+
+
+
+    </div> 
+  
+  </div>
+  
+</div>
+

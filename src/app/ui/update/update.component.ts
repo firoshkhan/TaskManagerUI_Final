@@ -18,8 +18,9 @@ export class UpdateComponent implements OnInit
   TaskId:string;
   task:Task[];
   msg:string;
+  _router:Router;
   constructor(private _service:SharedService, private activatedRoute: ActivatedRoute,
-    private _router:Router,    
+   
     private datePipe: DatePipe)
    {
     this.TaskId= this.activatedRoute.snapshot.paramMap.get('id');

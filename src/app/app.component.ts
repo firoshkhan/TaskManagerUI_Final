@@ -9,4 +9,5 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'Task Manager';
+  order: string = 'FirstName';
 }

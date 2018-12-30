@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit {
+    
+  
   task:Task[];
   subtask:Task[];
   FilterTask:Task[];
@@ -22,6 +24,7 @@ export class ViewComponent implements OnInit {
   FilterPriorityTo:number;
   FilterStartDate:Date;
   FilterEndDate:string;
+
   private datePipe: DatePipe
   constructor(private _service:SharedService, 
     private _router: Router) {
